@@ -9,7 +9,7 @@ import {
   NavbarMenuItem,
   Link,
 } from "@nextui-org/react";
-import { Home, Info, Star, Trophy, Menu, X } from "lucide-react";
+import { Home, Info, Star, Trophy, Menu, X, Newspaper } from "lucide-react";
 
 export default function AppNavbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,6 +25,7 @@ export default function AppNavbar() {
 
   const menuItems = [
     { name: "Inicio", href: "#inicio", icon: Home },
+    { name: "Noticias", href: "#actividades", icon: Newspaper },
     { name: "¿Qué es?", href: "#que-es", icon: Info },
     { name: "Características", href: "#caracteristicas", icon: Star },
     { name: "Beneficios", href: "#beneficios", icon: Trophy },
