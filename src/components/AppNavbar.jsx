@@ -7,7 +7,7 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  Link
+  Link,
 } from "@nextui-org/react";
 import { Home, Info, Star, Trophy, Menu, X } from "lucide-react";
 
@@ -37,7 +37,7 @@ export default function AppNavbar() {
         isMenuOpen={isMenuOpen}
         className={`
           rounded-full border border-white/10
-          bg-orange-400/20 backdrop-blur-xl
+          bg-white
           shadow-lg shadow-black/20
           transition-all duration-300
           w-full max-w-7xl mx-auto
@@ -49,7 +49,7 @@ export default function AppNavbar() {
         height="3.5rem"
         maxWidth="full"
       >
-        <NavbarContent>
+        <NavbarContent className="justify-between w-full">
           <NavbarBrand>
             <div className="flex items-center gap-2">
               <img
@@ -62,10 +62,15 @@ export default function AppNavbar() {
               </p>
             </div>
           </NavbarBrand>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            className="sm:hidden text-gray-700"
+            icon={isMenuOpen ? <X /> : <Menu />}
+          />
         </NavbarContent>
 
         {/* Desktop Menu */}
-        <NavbarContent className="hidden sm:flex gap-1" justify="center">
+        <NavbarContent className="hidden sm:flex gap-1 w-full">
           {menuItems.map((item, index) => (
             <NavbarItem key={item.name}>
               <Link
@@ -80,16 +85,20 @@ export default function AppNavbar() {
         </NavbarContent>
 
         <NavbarContent justify="end" className="gap-2">
-          {/* Mobile Menu Toggle */}
-          <NavbarMenuToggle
-            className="sm:hidden text-gray-700"
-            icon={isMenuOpen ? <X /> : <Menu />}
-          />
+          {/* Mobile Menu Toggle Removed from here */}
         </NavbarContent>
 
         {/* Mobile Menu */}
-        <NavbarMenu className="bg-white/90 backdrop-blur-xl pt-6 gap-4 rounded-2xl mt-2 mx-4 border border-white/20 shadow-xl z-40">
-           {menuItems.map((item, index) => (
+        <NavbarMenu
+          className="bg-white/90 backdrop-blur-xl pt-6 gap-4 w-3/4 sm:w-1/2 md:w-1/3 ml-auto h-screen top-0 border-l border-white/20 shadow-xl z-50 fixed right-0 bottom-0"
+          motionProps={{
+            initial: { opacity: 0, x: "100%" },
+            animate: { opacity: 1, x: 0 },
+            exit: { opacity: 0, x: "100%" },
+            transition: { ease: "easeInOut", duration: 0.3 },
+          }}
+        >
+          {menuItems.map((item, index) => (
             <NavbarMenuItem key={`${item.name}-${index}`}>
               <Link
                 color="foreground"
